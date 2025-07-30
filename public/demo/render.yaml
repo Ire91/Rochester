@@ -2,9 +2,11 @@ services:
   - type: web
     name: rochester-backend
     env: java
-    rootDir: public/demo
-    buildCommand: ./mvnw clean package
-    startCommand: java -jar target/demo-0.0.1-SNAPSHOT.jar
+    buildCommand: ./mvnw package
+    startCommand: java -jar target/*.jar
+    plan: free
+    branch: main
     buildFilter:
       paths:
-        - public/demo/**
+        - '**/*'
+    autoDeploy: true
