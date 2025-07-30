@@ -1,10 +1,5 @@
 services:
   - type: web
     name: rochester-demo
-    env: java
+    env: docker
     plan: free
-    buildCommand: ./mvnw package
-    startCommand: java -jar target/demo-0.0.1-SNAPSHOT.jar
-    envVars:
-      - key: JAVA_HOME
-        value: /opt/java/openjdk
