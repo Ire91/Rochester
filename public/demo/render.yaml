@@ -1,9 +1,10 @@
 services:
   - type: web
-    name: rochester-demo
+    name: rochester-backend
     env: java
+    rootDir: public/demo
     buildCommand: ./mvnw clean package
-    startCommand: java -jar target/*.jar
-    envVars:
-      - key: JAVA_HOME
-        value: /opt/render/project/.jdk
+    startCommand: java -jar target/demo-0.0.1-SNAPSHOT.jar
+    buildFilter:
+      paths:
+        - public/demo/**
