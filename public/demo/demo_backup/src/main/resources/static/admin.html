@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Bookings | Rochester Hotel</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background: #f5f6fa; }
+    
+    /* Dark mode styles */
+    body.dark-mode {
+      background: #1a1a1a;
+      color: #ffffff;
+    }
+    
+    body.dark-mode .admin-header h1 {
+      color: #ffffff;
+    }
+    
+    body.dark-mode .admin-table-container {
+      background: #2d2d2d;
+      color: #ffffff;
+    }
+    
+    body.dark-mode .admin-table {
+      background: #2d2d2d;
+      color: #ffffff;
+    }
+    
+    body.dark-mode .admin-table th {
+      background: #3a3a3a;
+      color: #ffffff;
+    }
+    
+    body.dark-mode .admin-table tr:hover {
+      background: #3a3a3a;
+    }
+    
+    body.dark-mode .admin-table td {
+      border-bottom-color: #444;
+      color: #ffffff;
+      background: #2d2d2d;
+    }
+    
+    body.dark-mode .admin-table tr {
+      background: #2d2d2d;
+      color: #ffffff;
+    }
+    
+    body.dark-mode .analytics-card {
+      background: #2d2d2d;
+      border-color: #c7a008;
+      color: #ffffff;
+    }
+    
+    body.dark-mode .analytics-card h3 {
+      color: #ffffff;
+    }
+    
+    body.dark-mode .admin-table-search input {
+      background: #3a3a3a;
+      border-color: #c7a008;
+      color: #ffffff;
+    }
+    
+    body.dark-mode .modal-content {
+      background: #2d2d2d;
+      color: #ffffff;
+    }
+    
+    body.dark-mode .modal-content input,
+    body.dark-mode .modal-content select,
+    body.dark-mode .modal-content textarea {
+      background: #3a3a3a;
+      border-color: #c7a008;
+      color: #ffffff;
+    }
+    
+    body.dark-mode .modal-content h2,
+    body.dark-mode .modal-content h3 {
+      color: #ffffff;
+    }
+    
+    body.dark-mode .modal-content label {
+      color: #ffffff;
+    }
+    
+    body.dark-mode .modal-content ul li {
+      color: #ffffff;
+    }
+    
+    body.dark-mode .modal-content strong {
+      color: #c7a008;
+    }
+    
+    body.dark-mode .modal-close {
+      color: #ffffff;
+    }
+    
+    body.dark-mode .modal-bg {
+      background: rgba(0,0,0,0.8);
+    }
+    
+    body.dark-mode .tab-btn {
+      background: #3a3a3a;
+      color: #ffffff;
+    }
+    
+    body.dark-mode .tab-btn.active {
+      background: #c7a008;
+      color: #ffffff;
+    }
+    
+    body.dark-mode .filter-btn {
+      background: #3a3a3a;
+      color: #ffffff;
+      border-color: #c7a008;
+    }
+    
+    body.dark-mode .filter-btn:hover,
+    body.dark-mode .filter-btn.active {
+      background: #c7a008;
+      color: #ffffff;
+    }
+    
+    body.dark-mode .status {
+      color: #ffffff;
+    }
+    
+    body.dark-mode .view-btn,
+    body.dark-mode .edit-btn,
+    body.dark-mode .delete-btn {
+      color: #ffffff;
+    }
+    
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 3.5rem auto 2.5rem auto;
+      padding: 0 2.5rem;
+    }
+    .admin-header h1 {
+      color: #004225;
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .logout-btn {
+      background: #b30000;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .logout-btn:hover {
+      background: #7a0000;
+    }
+    .analytics-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      max-width: 1400px;
+      margin: 0 auto 2rem auto;
+      padding: 0 1rem;
+    }
+    .analytics-card {
+      background: #fff;
+      border: 2px solid #c7a008;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .analytics-card h3 {
+      color: #004225;
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .analytics-card p {
+      color: #c7a008;
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 800;
+    }
+    .status-filters {
+      margin: 2rem 0;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0 1rem;
+    }
+    .filter-btn {
+      background: #f5f6fa;
+      border: 1px solid #c7a008;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #004225;
+      font-size: 0.9rem;
+    }
+    .filter-btn:hover {
+      background: #c7a008;
+      color: #fff;
+    }
+    .filter-btn.active {
+      background: #c7a008;
+      color: #fff;
+    }
+    .admin-table-container {
+      overflow-x: auto;
+      margin: 0 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .admin-table {
+      width: 100%;
+      min-width: 800px;
+      border-collapse: collapse;
+      background: #fff;
+    }
+    .admin-table th,
+    .admin-table td {
+      padding: 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    .admin-table th {
+      background: #f8f9fa;
+      font-weight: 600;
+      color: #004225;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .admin-table tr:hover {
+      background: #f8f9fa;
+    }
+    .actions-cell {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .view-btn, .edit-btn, .delete-btn {
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+    .view-btn {
+      background: #004225;
+      color: #fff;
+    }
+    .edit-btn {
+      background: #c7a008;
+      color: #fff;
+    }
+    .delete-btn {
+      background: #b30000;
+      color: #fff;
+    }
+    .view-btn:hover, .edit-btn:hover, .delete-btn:hover {
+      opacity: 0.8;
+      transform: translateY(-1px);
+    }
+    .admin-table-search {
+      margin: 1rem;
+      text-align: center;
+    }
+    .admin-table-search input {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.8rem 1rem;
+      border: 2px solid #c7a008;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+    }
+    .admin-table-search input:focus {
+      border-color: #004225;
+      box-shadow: 0 0 0 3px rgba(0,66,37,0.1);
+    }
+    .status {
+      padding: 0.3rem 0.8rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: inline-block;
+    }
+    .status.Pending { background: #ffe066; color: #b38f00; }
+    .status.Confirmed { background: #c7a008; color: #fff; }
+    .status.CheckedIn { background: #004225; color: #fff; }
+    .status.CheckedOut { background: #bdbdbd; color: #444; }
+    .status.Cancelled { background: #ffb3b3; color: #b30000; }
+    .status.Unpaid { background: #ffb3b3; color: #b30000; }
+    .status.Paid { background: #90EE90; color: #006400; }
+    .modal-bg {
+      display: none !important;
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      background: rgba(0,0,0,0.8) !important;
+      z-index: 99999 !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+    .modal-content {
+      background: rgba(255,255,255,0.95);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+      padding: 2rem 2.5rem 1.5rem 2.5rem;
+      min-width: 260px;
+      max-width: 90vw;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalIn 0.2s;
+      color: #333; /* Default text color for light mode */
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #666;
+    }
+    .modal-close:hover {
+      color: #000;
+    }
+    .admin-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0 0 0;
+    }
+    .tab-btn {
+      background: #f5f6fa;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: #c7a008;
+      color: #fff;
+    }
+    @media (max-width: 768px) {
+      .admin-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 1rem;
+      }
+      .admin-header h1 {
+        font-size: 1.8rem;
+    }
+    .analytics-cards {
+        padding: 0 0.5rem;
+    }
+    .analytics-card {
+        padding: 1rem;
+    }
+    .analytics-card h3 {
+        font-size: 0.9rem;
+    }
+      .analytics-card p {
+        font-size: 1.5rem;
+      }
+      .status-filters {
+        padding: 0 0.5rem;
+        gap: 0.3rem;
+      }
+      .filter-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+      }
+      .admin-table-container {
+        margin: 0 0.5rem;
+      }
+      .admin-table th,
+      .admin-table td {
+        padding: 0.5rem 0.3rem;
+        font-size: 0.8rem;
+      }
+      .actions-cell {
+        gap: 0.2rem;
+      }
+      .view-btn, .edit-btn, .delete-btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+      }
+      .admin-table-search {
+        margin: 0.5rem;
+      }
+      .admin-table-search input {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+      }
+    }
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    
+    .btn-success {
+      background: var(--brand-green);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    
+    .btn-success:hover {
+      background: #003018;
+    }
+    
+    body.dark-mode .btn-success {
+      background: var(--brand-gold);
+      color: var(--brand-dark);
+    }
+    
+    body.dark-mode .btn-success:hover {
+      background: #e6c200;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-tabs">
+    <button class="tab-btn active" id="tabBookingsBtn">Bookings</button>
+    <button class="tab-btn" id="tabRoomsBtn">Rooms</button>
+  </div>
+  <div class="admin-header">
+    <div style="display:flex;align-items:center;gap:0.7rem;">
+      <img src="images/logo.png" alt="Rochester Hotel Logo" style="height:38px;width:auto;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.07);background:#fff;">
+      <h1>Admin Dashboard</h1>
+      <div class="header-actions">
+        <button class="btn btn-success" onclick="exportToCSV()">📊 Export to CSV</button>
+        <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode">🌙</button>
+      </div>
+    </div>
+    <button class="logout-btn" onclick="window.location.href='admin-login.html'">Logout</button>
+  </div>
+  <!-- Bookings Section -->
+  <div id="bookingsSection">
+  <!-- Analytics Cards -->
+    <div class="analytics-cards">
+      <div class="analytics-card">
+        <h3>Total Bookings</h3>
+        <p id="totalBookings">0</p>
+      </div>
+      <div class="analytics-card">
+        <h3>Check-ins Today</h3>
+        <p id="checkInsToday">0</p>
+      </div>
+      <div class="analytics-card">
+        <h3>Check-outs Today</h3>
+        <p id="checkOutsToday">0</p>
+      </div>
+      <div class="analytics-card">
+        <h3>Occupancy Rate</h3>
+        <p id="occupancyRate">0%</p>
+      </div>
+      <div class="analytics-card">
+        <h3>Total Revenue</h3>
+        <p id="totalRevenue">₦0</p>
+      </div>
+      <div class="analytics-card">
+        <h3>Cancellations</h3>
+        <p id="cancellations">0</p>
+      </div>
+    </div>
+
+    <!-- Status Filters -->
+    <div class="status-filters" style="margin: 2rem 0; display: flex; gap: 1rem; flex-wrap: wrap;">
+      <button class="filter-btn active" data-status="all">All Bookings</button>
+      <button class="filter-btn" data-status="Pending">Pending</button>
+      <button class="filter-btn" data-status="Confirmed">Confirmed</button>
+      <button class="filter-btn" data-status="CheckedIn">Checked In</button>
+      <button class="filter-btn" data-status="CheckedOut">Checked Out</button>
+      <button class="filter-btn" data-status="Cancelled">Cancelled</button>
+      <button class="filter-btn" data-status="Paid">Paid</button>
+      <button class="filter-btn" data-status="Unpaid">Unpaid</button>
+  </div>
+
+    <!-- Search Bar -->
+    <div class="admin-table-search">
+      <input type="text" id="searchInput" placeholder="Search bookings...">
+    </div>
+
+    <!-- Bookings Table -->
+    <div class="admin-table-container">
+      <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Reference</th>
+          <th>Guest Name</th>
+          <th>Email</th>
+          <th>Room Type</th>
+          <th>Check-in</th>
+          <th>Check-out</th>
+          <th>Guests</th>
+          <th>Status</th>
+            <th>Payment Status</th>
+          <th>Rate/Night</th>
+          <th>Total</th>
+            <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="bookingsTbody">
+          <!-- Bookings will be populated here -->
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <!-- Room Management Section -->
+  <div class="admin-table-container" id="roomsSection" style="display:none;">
+    <h2 style="color:#004225; font-size:1.5rem; margin-bottom:1.5rem;">Room Management</h2>
+    <table class="admin-table" id="roomsTable">
+      <thead>
+        <tr>
+          <th>Room Type</th>
+          <th>Rate (₦)</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="roomsTbody">
+        <!-- Rows will be populated by JS -->
+      </tbody>
+    </table>
+  </div>
+  <!-- Add Room Button -->
+  <div id="addRoomBar" style="display:none; max-width:1400px; margin:0 auto 1.5rem auto; padding:0 2.5rem;">
+    <button class="view-btn" id="addRoomBtn" style="font-size:1rem; padding:0.6rem 1.5rem;">+ Add Room</button>
+  </div>
+  <!-- Modal for booking details -->
+  <div id="modalBg" class="modal-bg">
+    <div class="modal-content" style="padding:2rem; border-radius:16px; max-width:500px; width:90%; max-height:80vh; overflow-y:auto; position:relative; z-index:1000000; box-shadow:0 10px 30px rgba(0,0,0,0.5); border:3px solid #c7a008;">
+      <button class="modal-close" onclick="closeModal()" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:24px; cursor:pointer; color:#666;">&times;</button>
+      <h3 style="margin-top:0;">Booking Details</h3>
+      <ul id="modalDetails" style="list-style:none; padding:0; margin:1.2rem 0 0 0;"></ul>
+    </div>
+  </div>
+  <!-- Edit Booking Modal -->
+  <div class="modal-bg" id="editModalBg">
+    <div class="modal-content" style="padding:2rem; border-radius:16px; max-width:500px; width:90%; max-height:80vh; overflow-y:auto; position:relative; z-index:1000000; box-shadow:0 10px 30px rgba(0,0,0,0.5); border:3px solid #c7a008;">
+      <span class="modal-close" id="editModalClose" onclick="closeEditModal()" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:24px; cursor:pointer; color:#666;">&times;</span>
+      <h2 style="margin-top:0;">Edit Booking</h2>
+      <form id="editBookingForm" style="display:flex; flex-direction:column; gap:1rem;">
+        <input type="hidden" id="editReference" name="reference">
+        <label>Guest Name
+          <input type="text" id="editGuestName" name="guestName" required>
+        </label>
+        <label>Email
+          <input type="email" id="editEmail" name="email" required>
+        </label>
+        <label>Room Type
+          <input type="text" id="editRoomType" name="roomType" required>
+        </label>
+        <div style="display:flex; gap:1rem;">
+          <label style="flex:1;">Check-in
+            <input type="date" id="editCheckIn" name="checkIn" required>
+          </label>
+          <label style="flex:1;">Check-out
+            <input type="date" id="editCheckOut" name="checkOut" required>
+          </label>
+        </div>
+        <label>Guests
+          <input type="number" id="editGuests" name="guests" min="1" max="10" required>
+        </label>
+        <label>Status
+          <select id="editStatus" name="status" required>
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="CheckedIn">CheckedIn</option>
+            <option value="CheckedOut">CheckedOut</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </label>
+        <label>Payment Status
+          <select id="editPaymentStatus" name="paymentStatus" required>
+            <option value="Unpaid">Unpaid</option>
+            <option value="Paid">Paid</option>
+          </select>
+        </label>
+        <div style="display:flex; gap:1rem;">
+          <button type="submit" class="view-btn" style="flex:1;">Save</button>
+          <button type="button" class="delete-btn" id="editCancelBtn" onclick="closeEditModal()" style="flex:1;">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-bg" id="deleteModalBg">
+    <div class="modal-content" style="max-width:350px;">
+      <span class="modal-close" id="deleteModalClose">&times;</span>
+      <h3>Delete Booking</h3>
+      <p>Are you sure you want to delete the booking for <strong id="deleteBookingName"></strong>?</p>
+      <input type="hidden" id="deleteBookingId">
+      <div style="display:flex; gap:1rem; margin-top:1.2rem;">
+        <button class="delete-btn" id="deleteConfirmBtn" onclick="confirmDelete()" style="flex:1;">Delete</button>
+        <button class="view-btn" id="deleteCancelBtn" onclick="closeDeleteModal()" style="flex:1;">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <!-- Edit Room Modal -->
+  <div class="modal-bg" id="editRoomModalBg">
+    <div class="modal-content">
+      <span class="modal-close" id="editRoomModalClose">&times;</span>
+      <h2>Edit Room</h2>
+      <form id="editRoomForm" style="display:flex; flex-direction:column; gap:1rem;">
+        <input type="hidden" id="editRoomIndex" name="roomId">
+        <label>Room Type
+          <input type="text" id="editRoomType" name="roomType" required>
+        </label>
+        <label>Rate (₦)
+          <input type="number" id="editRoomRate" name="roomRate" min="0" required>
+        </label>
+        <label>Status
+          <select id="editRoomStatus" name="roomStatus" required>
+            <option value="Available">Available</option>
+            <option value="Occupied">Occupied</option>
+            <option value="Out of Service">Out of Service</option>
+          </select>
+        </label>
+        <label>Description
+          <textarea id="editRoomDescription" name="roomDescription" rows="3" placeholder="Room description..."></textarea>
+        </label>
+        <label>Image URL
+          <input type="text" id="editRoomImageUrl" name="roomImageUrl" placeholder="Image URL...">
+        </label>
+        <div style="display:flex; gap:1rem;">
+          <button type="submit" class="view-btn" style="flex:1;">Save</button>
+          <button type="button" class="delete-btn" id="editRoomCancelBtn" style="flex:1;">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Add Room Modal -->
+  <div class="modal-bg" id="addRoomModalBg">
+    <div class="modal-content">
+      <span class="modal-close" id="addRoomModalClose">&times;</span>
+      <h2>Add Room</h2>
+      <form id="addRoomForm" style="display:flex; flex-direction:column; gap:1rem;">
+        <label>Room Type
+          <input type="text" id="addRoomType" name="roomType" required>
+        </label>
+        <label>Rate (₦)
+          <input type="number" id="addRoomRate" name="roomRate" min="0" required>
+        </label>
+        <label>Status
+          <select id="addRoomStatus" name="roomStatus" required>
+            <option value="Available">Available</option>
+            <option value="Occupied">Occupied</option>
+            <option value="Out of Service">Out of Service</option>
+          </select>
+        </label>
+        <label>Description
+          <textarea id="addRoomDescription" name="roomDescription" rows="3" placeholder="Room description..."></textarea>
+        </label>
+        <label>Image URL
+          <input type="text" id="addRoomImageUrl" name="roomImageUrl" placeholder="Image URL...">
+        </label>
+        <div style="display:flex; gap:1rem;">
+          <button type="submit" class="view-btn" style="flex:1;">Add</button>
+          <button type="button" class="delete-btn" id="addRoomCancelBtn" style="flex:1;">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Delete Room Confirmation Modal -->
+  <div class="modal-bg" id="deleteRoomModalBg">
+    <div class="modal-content" style="max-width:350px;">
+      <span class="modal-close" id="deleteRoomModalClose">&times;</span>
+      <h3>Delete Room</h3>
+      <p>Are you sure you want to delete this room?</p>
+      <div style="display:flex; gap:1rem; margin-top:1.2rem;">
+        <button class="delete-btn" id="deleteRoomConfirmBtn" style="flex:1;">Delete</button>
+        <button class="view-btn" id="deleteRoomCancelBtn" style="flex:1;">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <script src="admin.js"></script>
+</body>
+</html> 
