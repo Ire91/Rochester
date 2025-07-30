@@ -10,3 +10,8 @@ services:
       paths:
         - '**/*'
     autoDeploy: true
+    build:
+  environment:
+    JAVA_HOME: /opt/render/project/.jdk
+  buildCommand: ./mvnw package
+
