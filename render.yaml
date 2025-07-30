@@ -3,12 +3,8 @@ services:
     name: rochester-demo
     env: java
     plan: free
-    rootDir: . # explicitly declare
     buildCommand: ./mvnw package
     startCommand: java -jar target/demo-0.0.1-SNAPSHOT.jar
-    build:
-      environment:
-        JAVA_HOME: /opt/render/project/.jdk
     envVars:
       - key: JAVA_HOME
-        value: /opt/render/project/.jdk
+        value: /opt/java/openjdk
