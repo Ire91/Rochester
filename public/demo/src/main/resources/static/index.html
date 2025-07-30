@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rochester Hotel</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo" style="display:flex;align-items:center;gap:0.7rem;text-decoration:none;">
+        <img src="images/logo.png" alt="Rochester Hotel Logo" style="height:40px;width:auto;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.07);background:#fff;">
+        <span class="navbar-brand" style="font-weight:800;font-size:1.3rem;color:#004225;">Rochester Hotel</span>
+      </a>
+      <ul class="navbar-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="rooms.html">Rooms</a></li>
+        <li><a href="index.html#bar">Bar & Dining</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode">🌙</button>
+    </div>
+  </nav>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Welcome to Rochester Hotel</h1>
+      <p class="hero-story">Experience the perfect blend of luxury, comfort, and hospitality in the heart of Ibadan. Whether you’re here for business or leisure, Rochester Hotel is your home away from home. Our lush gardens, elegant rooms, and world-class amenities ensure every stay is unforgettable.</p>
+      <a href="rooms.html" class="btn">Explore Our Rooms</a>
+    </div>
+  </header>
+  <main>
+    <section class="section highlights">
+      <h2>Why Choose Rochester?</h2>
+      <div class="highlights-list">
+        <div class="highlight-card">
+          <h3>Prime Location</h3>
+          <p>Located in KOLA BALOGUN STREET, ELEWURA BEHIND GLO OFFICE, CHALLENGE IBADAN, close to business and leisure destinations.</p>
+        </div>
+        <div class="highlight-card">
+          <h3>Luxury Rooms</h3>
+          <p>Spacious, beautifully furnished rooms for every guest.</p>
+        </div>
+        <div class="highlight-card">
+          <h3>Bar & Dining</h3>
+          <p>Enjoy a curated menu of drinks and local & international cuisine.</p>
+        </div>
+        <div class="highlight-card">
+          <h3>24/7 Service</h3>
+          <p>Our staff is always available to make your stay perfect.</p>
+        </div>
+      </div>
+    </section>
+    <section class="section testimonial">
+      <h2>What Our Guests Say</h2>
+      <blockquote>
+        “The best hotel experience I’ve had in Nigeria. The staff were attentive, the rooms were spotless, and the food was amazing. I’ll definitely be back!”
+        <footer>— Ada, Lagos</footer>
+      </blockquote>
+    </section>
+    <section id="bar" class="section">
+      <h2>Bar & Dining</h2>
+      <p>Relax at our stylish bar or enjoy a meal in our elegant dining area. Our menu features a selection of local and international favorites, expertly prepared by our chefs.</p>
+      <div class="bar-dining-story">
+        <h3>The Experience</h3>
+        <p>Step into an ambiance where sophistication meets comfort. Our bar is the perfect spot to unwind after a long day, with soft lighting, plush seating, and a curated playlist that sets the mood. Whether you’re meeting friends, celebrating a special occasion, or simply enjoying a quiet evening, you’ll find the atmosphere both lively and relaxing.</p>
+        <h3>Signature Drinks & Cocktails</h3>
+        <p>Our talented bartenders craft a range of signature cocktails, from classic favorites to unique creations inspired by local flavors. Try our famous Rochester Sunrise, a refreshing blend of tropical juices and premium spirits, or explore our selection of fine wines, local beers, and non-alcoholic mocktails.</p>
+        <h3>Dining Delights</h3>
+        <p>Our dining menu is a celebration of taste, featuring both Nigerian and international cuisine. Savor dishes like spicy suya skewers, jollof rice with grilled chicken, or indulge in continental classics such as pasta, steaks, and fresh salads. Vegetarian and vegan options are always available, and our chefs are happy to accommodate special dietary requests.</p>
+        <h3>Special Events & Private Dining</h3>
+        <p>Looking to host a private dinner or event? Our team can create a bespoke experience, from intimate birthday celebrations to corporate gatherings. Contact us to learn more about our event packages and group menus.</p>
+        <p class="bar-invite"><strong>Join us at the Rochester Bar & Dining — where every meal is a memory, and every drink is a toast to good times.</strong></p>
+      </div>
+    </section>
+    <section id="contact" class="section">
+      <h2>Contact Us</h2>
+      <form class="contact-form">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <div class="contact-info">
+        <p>KOLA BALOGUN STREET, ELEWURA BEHIND GLO OFFICE, CHALLENGE IBADAN</p>
+        <p>+234 901 140 3364</p>
+        <p>bookings@rochesterhotel.ng</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div style="display:flex;align-items:center;gap:0.7rem;justify-content:center;margin-bottom:0.5rem;">
+      <img src="images/logo.png" alt="Rochester Hotel Logo" style="height:32px;width:auto;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,0.07);background:#fff;">
+      <span style="font-weight:700;color:#004225;">Rochester Hotel</span>
+    </div>
+    <p>&copy; 2024 Rochester Hotel. All rights reserved.</p>
+  </footer>
+  <script src="script.js"></script>
+  <script>
+    // Theme toggle logic
+    const themeToggle = document.getElementById('themeToggle');
+    function setTheme(mode) {
+      document.body.classList.toggle('dark-mode', mode === 'dark');
+      themeToggle.textContent = mode === 'dark' ? '☀️' : '🌙';
+      localStorage.setItem('theme', mode);
+    }
+    themeToggle.onclick = function() {
+      const isDark = document.body.classList.toggle('dark-mode');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    };
+    // On load, set theme from localStorage
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') setTheme('dark');
+      else setTheme('light');
+    })();
+  </script>
+</body>
+</html> 
