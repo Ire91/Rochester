@@ -4,4 +4,4 @@ services:
     env: docker
     plan: free
     ports:
-      - port: 5050
+      - port: 8080
