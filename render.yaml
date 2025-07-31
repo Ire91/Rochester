@@ -3,5 +3,5 @@ services:
     name: rochester-demo
     env: docker
     plan: free
-     ports:
+    ports:
       - port: 5050
