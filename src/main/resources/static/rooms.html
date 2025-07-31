@@ -67,10 +67,15 @@
       else setTheme('light');
     })();
     
+    // Configuration
+    const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+      ? 'http://localhost:5050' 
+      : window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+    
     // Load rooms from API
     async function loadRooms() {
       try {
-        const response = await fetch('http://localhost:5050/api/rooms');
+        const response = await fetch(`${API_BASE_URL}/api/rooms`);
         if (response.ok) {
           const rooms = await response.json();
           renderRooms(rooms);

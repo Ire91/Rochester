@@ -1,3 +1,8 @@
+// Configuration
+const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+  ? 'http://localhost:5050' 
+  : window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+
 let bookings = [];
 let rooms = [];
 
@@ -129,7 +134,7 @@ window.confirmDelete = async function() {
   const bookingId = document.getElementById('deleteBookingId').value;
   
   try {
-    const response = await fetch(`http://localhost:5050/api/bookings/${bookingId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/bookings/${bookingId}`, {
       method: 'DELETE'
     });
     
@@ -244,7 +249,7 @@ function initTheme() {
 // Load bookings from API
 async function loadBookings() {
   try {
-    const response = await fetch('http://localhost:5050/api/bookings');
+    const response = await fetch(`${API_BASE_URL}/api/bookings`);
     if (response.ok) {
       bookings = await response.json();
       // Sort by latest first (newest bookings at top)
@@ -261,7 +266,7 @@ async function loadBookings() {
 
 async function loadRooms() {
   try {
-    const response = await fetch('http://localhost:5050/api/rooms');
+    const response = await fetch(`${API_BASE_URL}/api/rooms`);
     if (response.ok) {
       rooms = await response.json();
       renderRooms();
@@ -387,7 +392,7 @@ async function saveBooking(formData) {
   };
   console.log('Updating booking with:', updated);
   try {
-    const response = await fetch(`http://localhost:5050/api/bookings/${bookingId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/bookings/${bookingId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -444,7 +449,7 @@ function editRoom(roomId) {
 async function deleteRoom(roomId) {
   if (confirm('Are you sure you want to delete this room?')) {
     try {
-      const response = await fetch(`http://localhost:5050/api/rooms/${roomId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/rooms/${roomId}`, {
         method: 'DELETE'
       });
       
@@ -484,7 +489,7 @@ async function addRoom() {
   };
   
   try {
-    const response = await fetch('http://localhost:5050/api/rooms', {
+    const response = await fetch(`${API_BASE_URL}/api/rooms`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -617,7 +622,7 @@ function setupModals() {
     };
     
     try {
-      const response = await fetch(`http://localhost:5050/api/rooms/${roomId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/rooms/${roomId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -654,7 +659,7 @@ function setupModals() {
     };
     
     try {
-      const response = await fetch('http://localhost:5050/api/rooms', {
+      const response = await fetch(`${API_BASE_URL}/api/rooms`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -1,3 +1,8 @@
+// Configuration
+const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+  ? 'http://localhost:5050' 
+  : window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+
 // Date validation setup
 function setMinDates() {
   const today = new Date();
@@ -186,7 +191,7 @@ let ROOM_PRICES = {};
 // Load room prices from backend
 async function loadRoomPrices() {
   try {
-    const response = await fetch('http://localhost:5050/api/rooms');
+    const response = await fetch(`${API_BASE_URL}/api/rooms`);
     if (response.ok) {
       const rooms = await response.json();
       ROOM_PRICES = {}; // Clear old prices
@@ -287,7 +292,7 @@ document.getElementById('booking-form').addEventListener('submit', async functio
 
   try {
     // 1. Send booking to backend
-    const response = await fetch('http://localhost:5050/api/bookings', {
+    const response = await fetch(`${API_BASE_URL}/api/bookings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
