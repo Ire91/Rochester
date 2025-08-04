@@ -420,6 +420,7 @@ footer {
   .navbar-container {
     padding: 0.5rem 1rem;
     justify-content: space-between;
+    align-items: center;
   }
   
   .navbar-links {
@@ -432,6 +433,49 @@ footer {
   
   .theme-toggle {
     display: none;
+  }
+  
+  /* Improve mobile responsiveness */
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .section {
+    padding: 2rem 1rem 1.5rem 1rem;
+  }
+  
+  .highlights-list {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .highlight-card {
+    padding: 1rem 0.8rem;
+  }
+  
+  .room-list {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .room-card {
+    min-width: 0;
+    max-width: 100%;
+    padding: 1.5rem 1rem;
+  }
+  
+  .contact-form {
+    max-width: 100%;
+    padding: 1.5rem 1rem;
+  }
+  
+  .booking-form {
+    max-width: 100%;
+    padding: 1.5rem 1rem;
   }
 }
 .highlights-list {
@@ -737,6 +781,26 @@ footer {
   font-size: 24px;
   cursor: pointer;
   color: var(--brand-dark);
+}
+
+/* Mobile theme toggle styling */
+.mobile-nav-menu .theme-toggle {
+  display: block !important;
+  margin: 20px auto 0 auto;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  background: var(--brand-gold);
+  color: var(--brand-green);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.mobile-nav-menu .theme-toggle:hover {
+  background: var(--brand-green);
+  color: var(--brand-gold);
 }
 
 /* Dark mode support for mobile nav */

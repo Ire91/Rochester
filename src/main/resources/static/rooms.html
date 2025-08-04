@@ -71,16 +71,35 @@
   <script>
     // Theme toggle logic
     const themeToggle = document.getElementById('themeToggle');
+    const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+    
     function setTheme(mode) {
       document.body.classList.toggle('dark-mode', mode === 'dark');
       themeToggle.textContent = mode === 'dark' ? '☀️' : '🌙';
+      if (mobileThemeToggle) {
+        mobileThemeToggle.textContent = mode === 'dark' ? '☀️' : '🌙';
+      }
       localStorage.setItem('theme', mode);
     }
+    
     themeToggle.onclick = function() {
       const isDark = document.body.classList.toggle('dark-mode');
       themeToggle.textContent = isDark ? '☀️' : '🌙';
+      if (mobileThemeToggle) {
+        mobileThemeToggle.textContent = isDark ? '☀️' : '🌙';
+      }
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     };
+    
+    if (mobileThemeToggle) {
+      mobileThemeToggle.onclick = function() {
+        const isDark = document.body.classList.toggle('dark-mode');
+        themeToggle.textContent = isDark ? '☀️' : '🌙';
+        mobileThemeToggle.textContent = isDark ? '☀️' : '🌙';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      };
+    }
+    
     // On load, set theme from localStorage
     (function() {
       const saved = localStorage.getItem('theme');
