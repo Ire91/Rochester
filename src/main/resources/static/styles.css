@@ -616,15 +616,19 @@ footer {
 }
 @media (max-width: 700px) {
   .navbar-container {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    padding: 0.5rem 0.7rem !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0.5rem 1rem !important;
   }
   .navbar-links {
-    flex-direction: column !important;
-    gap: 0.7rem !important;
-    width: 100% !important;
-    margin-top: 0.5rem !important;
+    display: none !important;
+  }
+  .hamburger-menu {
+    display: flex !important;
+  }
+  .theme-toggle {
+    display: none !important;
   }
 } 
 
@@ -640,6 +644,7 @@ footer {
   cursor: pointer;
   padding: 0;
   z-index: 1001;
+  position: relative;
 }
 
 .hamburger-menu span {
