@@ -1,256 +1,194 @@
-# Rochester Hotel - Hotel Booking Web Application
+# 🏨 Rochester Hotel - Hotel Management System
 
-A complete, production-oriented hotel booking web application built with Spring Boot for Rochester Hotel in Ibadan, Nigeria.
+A modern, responsive hotel management system built with Spring Boot backend and vanilla HTML/CSS/JavaScript frontend. Features room booking, admin dashboard, and beautiful UI with dark/light theme support.
 
-## Features
+## ✨ Features
 
-### Public Site
-- **Home Page**: Hero section with availability checker and hotel information
-- **Rooms & Rates**: Display room information and pricing (₦40,000/night)
-- **Booking Flow**: Multi-step wizard (availability → guest details → review → payment → confirmation)
-- **Bar & Dining**: Menu display with drinks and snacks
-- **About & Contact**: Hotel information and contact form
-- **Mobile-First Design**: Responsive Bootstrap 5 UI with brand colors
+### 🎨 Frontend Features
+- **Responsive Design** - Works perfectly on desktop, tablet, and mobile
+- **Dark/Light Theme** - Toggle between themes with persistent preference
+- **Modern UI** - Beautiful, professional design with smooth animations
+- **Mobile Navigation** - Hamburger menu with theme toggle for mobile devices
+- **Interactive Booking** - Multi-step booking process with form validation
+- **Room Gallery** - Dynamic room display with images and descriptions
 
-### Admin Portal
-- **Dashboard**: Occupancy rates, revenue, today's arrivals/departures
-- **Booking Management**: Search, view, modify, and cancel bookings
-- **Room Management**: Room status, maintenance mode
-- **Payment Tracking**: Transaction history and reconciliation
-- **Content Management**: Edit website content, bar menu items
-- **User Management**: Staff accounts and role management
-- **Reports**: Export booking and revenue data
+### 🔧 Backend Features
+- **Spring Boot API** - RESTful endpoints for room management
+- **Booking System** - Complete booking workflow with status tracking
+- **Admin Dashboard** - Manage bookings, rooms, and hotel operations
+- **Database Integration** - H2 in-memory database for development
+- **Security** - Basic authentication for admin access
 
-### Technical Features
-- **Payment Integration**: Mock gateway + Paystack/Stripe abstraction
-- **Email Notifications**: Booking confirmations and cancellations
-- **REST API**: Full API for future mobile/SPA integration
-- **Security**: Role-based access control, CSRF protection
-- **Database**: PostgreSQL with H2 for development
-- **Configurable**: All hotel details in YAML configuration
+### 📱 Mobile-First Design
+- **Hamburger Menu** - Clean mobile navigation
+- **Touch-Friendly** - Large buttons and touch targets
+- **Responsive Forms** - Optimized for mobile input
+- **Theme Toggle** - Accessible in mobile menu
 
-## Prerequisites
+## 🚀 Quick Start
 
-- **Java 21** (or Java 17 minimum)
-- **Maven 3.6+**
-- **PostgreSQL 12+** (for production)
-- **SMTP Server** (for email notifications)
+### Prerequisites
+- Java 17 or higher
+- Maven 3.6+
+- Modern web browser
 
-## Quick Start
+### Local Development Setup
 
-### 1. Clone and Configure
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Ire91/Rochester.git
+   cd Rochester
+   ```
 
-```bash
-git clone <repository-url>
-cd rochester-hotel
+2. **Run the Spring Boot application**
+   ```bash
+   mvn spring-boot:run
+   ```
+
+3. **Access the application**
+   - Main site: http://localhost:8080
+   - Admin dashboard: http://localhost:8080/admin.html
+   - API endpoints: http://localhost:8080/api/rooms
+
+### Project Structure
+```
+Rochester/
+├── src/main/resources/static/     # Frontend files
+│   ├── index.html                 # Home page
+│   ├── rooms.html                 # Rooms page
+│   ├── booking.html               # Booking page
+│   ├── admin.html                 # Admin dashboard
+│   ├── styles.css                 # Main stylesheet
+│   ├── script.js                  # Main JavaScript
+│   └── images/                    # Images and assets
+├── src/main/java/                 # Java backend
+│   └── com/example/demo/
+│       ├── controller/            # REST controllers
+│       ├── model/                 # Data models
+│       ├── repository/            # Data access layer
+│       └── DemoApplication.java   # Main application
+└── pom.xml                        # Maven dependencies
 ```
 
-### 2. Configure Application
+## 🛠️ Development
 
-Copy and edit the configuration:
+### Frontend Development
+- **HTML Structure** - Semantic, accessible markup
+- **CSS Styling** - CSS custom properties for theming
+- **JavaScript** - Vanilla JS with modern ES6+ features
+- **Responsive Design** - Mobile-first approach with media queries
 
-```bash
-cp src/main/resources/application.yaml src/main/resources/application-local.yaml
+### Backend Development
+- **Spring Boot** - Rapid application development
+- **REST API** - Clean, RESTful endpoints
+- **H2 Database** - In-memory database for development
+- **Maven** - Dependency management and build tool
+
+## 🚀 Deployment
+
+### Option 1: Traditional Deployment
+1. **Build the application**
+   ```bash
+   mvn clean package
+   ```
+
+2. **Run the JAR file**
+   ```bash
+   java -jar target/demo-0.0.1-SNAPSHOT.jar
+   ```
+
+### Option 2: Docker Deployment
+1. **Create Dockerfile**
+   ```dockerfile
+   FROM openjdk:17-jdk-slim
+   COPY target/demo-0.0.1-SNAPSHOT.jar app.jar
+   EXPOSE 8080
+   ENTRYPOINT ["java","-jar","/app.jar"]
+   ```
+
+2. **Build and run**
+   ```bash
+   docker build -t rochester-hotel .
+   docker run -p 8080:8080 rochester-hotel
+   ```
+
+### Option 3: Cloud Deployment
+- **Heroku** - Easy deployment with Git integration
+- **AWS** - Scalable cloud deployment
+- **Google Cloud** - Enterprise-grade hosting
+
+## 📊 API Endpoints
+
+### Rooms API
+- `GET /api/rooms` - Get all rooms
+- `GET /api/rooms/{id}` - Get specific room
+- `POST /api/rooms` - Create new room
+- `PUT /api/rooms/{id}` - Update room
+- `DELETE /api/rooms/{id}` - Delete room
+
+### Bookings API
+- `GET /api/bookings` - Get all bookings
+- `POST /api/bookings` - Create new booking
+- `PUT /api/bookings/{id}` - Update booking status
+
+## 🎨 Customization
+
+### Theme Colors
+The application uses CSS custom properties for easy theming:
+```css
+:root {
+  --brand-green: #004225;
+  --brand-gold: #c7a008;
+  --brand-white: #fff;
+  --brand-bg: #f5f6fa;
+  --brand-dark: #222;
+}
 ```
 
-Edit `application-local.yaml` to customize hotel details:
+### Adding New Pages
+1. Create HTML file in `src/main/resources/static/`
+2. Include `styles.css` and `script.js`
+3. Add navigation links
+4. Test responsiveness
 
-```yaml
-rochester:
-  hotel:
-    name: "Your Hotel Name"
-    city: "Your City"
-    address-line: "Your Address"
-    phone: "+234 XXX XXX XXXX"
-    email: "bookings@yourhotel.com"
-    global-room-price: 4000000  # ₦40,000 in kobo
-    max-rooms: 25
-    payment-gateway: "MOCK"  # or "PAYSTACK"
-```
-
-### 3. Build and Run
-
-#### Development Mode (H2 Database)
-```bash
-./mvnw clean install
-./mvnw spring-boot:run -Dspring-boot.run.profiles=local
-```
-
-#### Production Mode (PostgreSQL)
-```bash
-# Set up PostgreSQL database
-createdb rochester_hotel
-createuser rochester_user --pwprompt
-
-# Set environment variables
-export DB_USERNAME=rochester_user
-export DB_PASSWORD=your_password
-export MAIL_HOST=smtp.gmail.com
-export MAIL_USERNAME=your_email@gmail.com
-export MAIL_PASSWORD=your_app_password
-
-# Run application
-./mvnw clean install
-./mvnw spring-boot:run -Dspring-boot.run.profiles=prod
-```
-
-### 4. Access the Application
-
-- **Public Website**: http://localhost:5050
-- **Admin Portal**: http://localhost:5050/admin/dashboard
-- **H2 Console** (dev only): http://localhost:5050/h2-console
-
-#### Default Admin Credentials
-- **Email**: admin@rochesterhotel.ng
-- **Password**: ChangeMe123!
-
-## Configuration Variables
-
-All hotel-specific settings can be configured via environment variables or YAML:
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `HOTEL_NAME` | Rochester Hotel | Hotel name displayed throughout the site |
-| `HOTEL_CITY` | Ibadan | City location |
-| `HOTEL_COUNTRY` | Nigeria | Country |
-| `HOTEL_ADDRESS_LINE` | KOLA BALOGUN STREET, ELEWURA BEHIND GLO OFFICE, CHALLENGE IBADAN | Full address |
-| `HOTEL_PHONE` | +234 9011403364 | Contact phone number |
-| `HOTEL_EMAIL` | bookings@rochesterhotel.ng | Contact email |
-| `GLOBAL_ROOM_PRICE` | 4000000 | Room price per night in kobo (₦40,000) |
-| `CURRENCY_CODE` | NGN | Currency code |
-| `CHECKIN_TIME` | 14:00 | Check-in time |
-| `CHECKOUT_TIME` | 12:00 | Check-out time |
-| `MAX_ROOMS` | 25 | Total number of bookable rooms |
-| `TAX_RATE_PERCENT` | 7.5 | VAT/tax percentage |
-| `SERVICE_FEE_PERCENT` | 5.0 | Service fee percentage |
-| `PAYMENT_GATEWAY` | MOCK | Payment gateway (MOCK/PAYSTACK/STRIPE) |
-
-## Payment Gateway Setup
-
-### Mock Gateway (Development)
-No setup required. Provides a simulation interface for testing bookings.
-
-### Paystack Integration
-```yaml
-payment:
-  paystack:
-    public-key: ${PAYSTACK_PUBLIC_KEY}
-    secret-key: ${PAYSTACK_SECRET_KEY}
-    webhook-secret: ${PAYSTACK_WEBHOOK_SECRET}
-```
-
-Set `PAYMENT_GATEWAY=PAYSTACK` in configuration.
-
-### Stripe Integration
-```yaml
-payment:
-  stripe:
-    public-key: ${STRIPE_PUBLIC_KEY}
-    secret-key: ${STRIPE_SECRET_KEY}
-    webhook-secret: ${STRIPE_WEBHOOK_SECRET}
-```
-
-Set `PAYMENT_GATEWAY=STRIPE` in configuration.
-
-## Database Schema
-
-The application uses Flyway for database migrations. Schema includes:
-
-- **users**: Staff and admin accounts
-- **rooms**: Room inventory and status
-- **bookings**: Guest reservations
-- **payments**: Payment transactions
-- **bar_items**: Bar menu items
-- **content_blocks**: CMS content
-- **room_rates**: Pricing (supports future dynamic pricing)
-
-## API Endpoints
-
-### Public API
-- `GET /api/v1/availability` - Check room availability
-- `POST /api/v1/bookings` - Create new booking
-- `GET /api/v1/bookings/{code}` - Get booking details
-
-### Admin API (Authentication Required)
-- `POST /api/v1/bookings/{id}/confirm` - Confirm booking
-- `POST /api/v1/bookings/{id}/cancel` - Cancel booking
-
-## Email Templates
-
-Email notifications are sent for:
-- Booking confirmations
-- Booking cancellations
-- Contact form submissions
-
-Templates are located in `src/main/resources/templates/email/`.
-
-## Testing
-
-```bash
-# Run all tests
-./mvnw test
-
-# Run with coverage
-./mvnw test jacoco:report
-```
-
-## Deployment
-
-### Docker Deployment
-```bash
-# Build Docker image
-docker build -t rochester-hotel .
-
-# Run with PostgreSQL
-docker-compose up -d
-```
-
-### Traditional Deployment
-1. Build JAR: `./mvnw clean package`
-2. Copy `target/rochester-hotel-1.0.0.jar` to server
-3. Set environment variables
-4. Run: `java -jar rochester-hotel-1.0.0.jar`
-
-## Customization
-
-### Branding
-- Colors defined in CSS variables in templates
-- Logo and images in `src/main/resources/static/images/`
-- Brand colors: Deep Green (#004225) + Gold Accent (#c7a008)
-
-### Content Management
-- Edit content via Admin Portal → Content Pages
-- Modify bar menu via Admin Portal → Bar Menu
-- Upload images via static file management
-
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Common Issues
 
-1. **Database Connection Errors**
-   - Verify PostgreSQL is running
-   - Check database credentials
-   - Ensure database exists
+**Application won't start**
+- Check Java version: `java -version`
+- Verify Maven installation: `mvn -version`
+- Check port availability: `netstat -an | grep 8080`
 
-2. **Email Not Sending**
-   - Verify SMTP configuration
-   - Check firewall settings
-   - Use app passwords for Gmail
+**Static files not loading**
+- Ensure files are in `src/main/resources/static/`
+- Check browser console for 404 errors
+- Verify file permissions
 
-3. **Payment Gateway Issues**
-   - Verify API keys are correct
-   - Check webhook URLs
-   - Test with sandbox/test keys first
+**Mobile responsiveness issues**
+- Test on actual mobile devices
+- Check viewport meta tag
+- Verify CSS media queries
 
-### Logs
-Application logs are available at:
-- Console output during development
-- `/var/log/rochester-hotel/` in production
+## 📝 Contributing
 
-## Support
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
-For technical support or customization requests, please contact the development team.
+## 📄 License
 
-## License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-MIT License - see LICENSE file for details.
+## 🙏 Acknowledgments
+
+- **Spring Boot** - For the excellent framework
+- **Unsplash** - For beautiful hotel images
+- **Modern CSS** - For responsive design techniques
+- **Vanilla JavaScript** - For clean, maintainable code
+
+---
+
+**Built with ❤️ for Rochester Hotel**
